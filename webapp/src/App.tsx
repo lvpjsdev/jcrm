@@ -1,7 +1,10 @@
+import { TRPCProvider } from './lib/trpc';
+import { UsersPage } from './pages/users';
+
 export const App = () => {
   return (
-    <>
-      <h1>JCRM</h1>
-    </>
+    <TRPCProvider>
+      <UsersPage />
+    </TRPCProvider>
   );
 };

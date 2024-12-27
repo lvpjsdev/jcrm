@@ -1,5 +1,5 @@
 {
-  "name": "webapp",
+  "name": "@jcrm/webapp",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,6 +11,10 @@
     "prettify": "prettier --log-level log --ignore-path ./.prettierignore --cache --write {src/**/*,*}.{ts,tsx,js,json,yml,scss}"
   },
   "dependencies": {
+    "@jcrm/backend": "workspace:*",
+    "@tanstack/react-query": "^5.62.11",
+    "@trpc/client": "11.0.0-rc.666",
+    "@trpc/react-query": "11.0.0-rc.666",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

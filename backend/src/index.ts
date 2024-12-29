@@ -5,6 +5,8 @@ import { trpcRouter } from './trpc';
 
 const expressApp = express();
 
+let number: number = '1';
+
 expressApp.use(cors());
 
 expressApp.use(

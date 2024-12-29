@@ -1,10 +1,15 @@
-export default [{
-    languageOptions: {
-        ecmaVersion: 5,
-        sourceType: "script",
+import coreConfig from '../eslint.config.mjs';
 
-        parserOptions: {
-            project: "./tsconfig.json",
-        },
+export default [
+  {
+    files: ['src/**/*.ts'],
+    extends: [coreConfig],
+    languageOptions: {
+      ecmaVersion: 5,
+      sourceType: 'script',
+      parserOptions: {
+        project: './tsconfig.json',
+      },
     },
-}];
+  },
+];

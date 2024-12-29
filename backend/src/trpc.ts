@@ -11,7 +11,7 @@ const users = [
 const trpc = initTRPC.create();
 
 if (!true) {
-  console.log('sdfavf')
+  console.log('sdfavf');
 }
 
 export const trpcRouter = trpc.router({

@@ -1,4 +1,5 @@
 import { initTRPC } from '@trpc/server';
+import z from 'zod';
 
 const users = [
   { id: 1, telegram: 'user1', email: 'user1@gmail.com', startDate: '11.12.24', period: 30 },
@@ -11,8 +12,11 @@ const users = [
 const trpc = initTRPC.create();
 
 export const trpcRouter = trpc.router({
-  users: trpc.procedure.query(() => {
+  getUsersList: trpc.procedure.query(() => {
     return { users };
+  }),
+  getUser: trpc.procedure.input(z.object({ userId: z.string() })).query(({ input: { userId } }) => {
+    return users.find((user) => user.id === +userId) || null;
   }),
 });
 

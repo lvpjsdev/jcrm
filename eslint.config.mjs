@@ -46,6 +46,7 @@ export default [
       '@typescript-eslint/consistent-type-assertions': 'off',
       'jsx-a11y/anchor-is-valid': 'off',
       'eslint-comments/require-description': 'off',
+      'react/react-in-jsx-scope': 'off',
 
       curly: ['error', 'all'],
 

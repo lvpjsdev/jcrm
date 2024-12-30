@@ -1,5 +1,5 @@
 import { Link, Outlet } from 'react-router';
-import { getViewAllUsersRoute } from '../../app/routes';
+import * as routes from '../../app/routes';
 import styles from './index.module.scss';
 
 export const Layout = () => {
@@ -9,8 +9,13 @@ export const Layout = () => {
         <div className={styles.logo}>JCRM</div>
         <ul className={styles.menu}>
           <li>
-            <Link className={styles.link} to={getViewAllUsersRoute()}>
-              All Users
+            <Link className={styles.link} to={routes.getViewAllUsersRoute()}>
+              All users
+            </Link>
+          </li>
+          <li>
+            <Link className={styles.link} to={routes.getViewAddUserRoute()}>
+              Add user
             </Link>
           </li>
         </ul>

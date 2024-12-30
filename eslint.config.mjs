@@ -2,9 +2,10 @@ import love from 'eslint-config-love';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default [
+  love,
+  eslintConfigPrettier,
   {
     ignores: ['**/node_modules', '**/dist'],
-    extends: [love, eslintConfigPrettier],
     rules: {
       'import/order': [
         'error',

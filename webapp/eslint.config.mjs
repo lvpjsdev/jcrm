@@ -1,10 +1,15 @@
-import reactConfig from 'eslint-config-react-app';
 import coreConfig from '../eslint.config.mjs';
+import antfu from '@antfu/eslint-config';
+
+const reactAntfuConfig = antfu({
+  react: true,
+});
 
 export default [
+  reactAntfuConfig,
+  coreConfig,
   {
-    files: ['**/*.{ts,tsx}'],
-    extends: [coreConfig, reactConfig],
+    files: ['./**/*.{ts,tsx}'],
     languageOptions: {
       parserOptions: {
         project: './tsconfig.json',

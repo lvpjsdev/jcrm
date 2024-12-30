@@ -1,9 +1,9 @@
 import coreConfig from '../eslint.config.mjs';
 
 export default [
+  ...coreConfig,
   {
     files: ['src/**/*.ts'],
-    extends: [coreConfig],
     languageOptions: {
       ecmaVersion: 5,
       sourceType: 'script',

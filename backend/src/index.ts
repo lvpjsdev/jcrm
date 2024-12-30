@@ -3,6 +3,8 @@ import cors from 'cors';
 import express from 'express';
 import { trpcRouter } from './trpc';
 
+const PORT = 3000;
+
 const expressApp = express();
 
 expressApp.use(cors());
@@ -14,6 +16,6 @@ expressApp.use(
   })
 );
 
-expressApp.listen(3000, () => {
+expressApp.listen(PORT, () => {
   console.log('Server started on port 3000');
 });

@@ -2,10 +2,27 @@ import love from 'eslint-config-love';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default [
+  {
+    ignores: [
+      'dist/**/*.ts',
+      'dist/**',
+      '**/*.mjs',
+      'eslint.config.mjs',
+      '**/*.js',
+      'node_modules',
+    ],
+  },
   love,
   eslintConfigPrettier,
   {
-    ignores: ['**/node_modules', '**/dist'],
+    ignores: [
+      'node_modules',
+      'dist/**/*.ts',
+      'dist/**',
+      '**/*.mjs',
+      'eslint.config.mjs',
+      '**/*.js',
+    ],
     rules: {
       'import/order': [
         'error',
@@ -25,8 +42,11 @@ export default [
       '@typescript-eslint/restrict-template-expressions': 'off',
       '@typescript-eslint/triple-slash-reference': 'off',
       '@typescript-eslint/ban-types': 'off',
+      '@typescript-eslint/no-magic-numbers': 'off',
       '@typescript-eslint/consistent-type-assertions': 'off',
       'jsx-a11y/anchor-is-valid': 'off',
+      'eslint-comments/require-description': 'off',
+
       curly: ['error', 'all'],
 
       'no-irregular-whitespace': [

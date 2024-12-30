@@ -1,14 +1,13 @@
-import { User } from './entities/User';
-import { TRPCProvider } from './app/trpc';
-import { UsersPage } from './pages/users';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import * as routes from './app/routes';
+import { TRPCProvider } from './app/trpc';
+import { User } from './entities/User';
 import { Layout } from './layouts/Layout/Layout';
 import './app/styles/global.scss';
 import { AddUserPage } from './pages/AddUserPage';
+import { UsersPage } from './pages/users';
 
-export const App = () => {
-  return (
+export const App = () => (
     <TRPCProvider>
       <BrowserRouter>
         <Routes>
@@ -21,4 +20,3 @@ export const App = () => {
       </BrowserRouter>
     </TRPCProvider>
   );
-};

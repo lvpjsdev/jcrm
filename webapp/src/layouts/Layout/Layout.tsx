@@ -2,8 +2,7 @@ import { Link, Outlet } from 'react-router';
 import * as routes from '../../app/routes';
 import styles from './index.module.scss';
 
-export const Layout = () => {
-  return (
+export const Layout = () => (
     <section className={styles.layout}>
       <nav className={styles.navigation}>
         <div className={styles.logo}>JCRM</div>
@@ -25,4 +24,3 @@ export const Layout = () => {
       </section>
     </section>
   );
-};

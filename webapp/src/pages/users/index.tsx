@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
-import { trpc } from '../../app/trpc';
 import { getViewUserRoute } from '../../app/routes';
+import { trpc } from '../../app/trpc';
 
 export const UsersPage = () => {
   const { isLoading, isError, isFetching, data, error } = trpc.getUsersList.useQuery();
@@ -22,13 +22,11 @@ export const UsersPage = () => {
     <>
       <h1>Users</h1>
       <ul>
-        {data?.users.map((user) => {
-          return (
+        {data?.users.map((user) => (
             <li key={user.id}>
               <Link to={getViewUserRoute({ userId: `${user.id}` })}>{user.telegram}</Link>
             </li>
-          );
-        })}
+          ))}
       </ul>
     </>
   );

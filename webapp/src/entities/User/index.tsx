@@ -1,6 +1,7 @@
-import { FC } from 'react';
+/* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
+import type { FC } from 'react';
 import { useParams } from 'react-router';
-import { ViewUsersRouteParams } from '../../app/routes';
+import type { ViewUsersRouteParams } from '../../app/routes';
 import { trpc } from '../../app/trpc';
 
 // interface UserProps {
@@ -11,10 +12,12 @@ import { trpc } from '../../app/trpc';
 //   //   period: number;
 // }
 
-export const User: FC<{}> = () => {
+export const User: FC = () => {
   const { userId } = useParams() as ViewUsersRouteParams;
 
-  const { isLoading, isError, isFetching, data, error } = trpc.getUser.useQuery({ userId });
+  const { isLoading, isError, isFetching, data, error } = trpc.getUser.useQuery({
+    userId,
+  });
 
   if (isLoading || isFetching) {
     return <span>Loading...</span>;

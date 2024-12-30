@@ -1,7 +1,9 @@
-import { trpc } from '../../lib/trpc';
+import { Link } from 'react-router';
+import { trpc } from '../../app/trpc';
+import { getViewUserRoute } from '../../app/routes';
 
 export const UsersPage = () => {
-  const { isLoading, isError, isFetching, data, error } = trpc.users.useQuery();
+  const { isLoading, isError, isFetching, data, error } = trpc.getUsersList.useQuery();
 
   if (isLoading || isFetching) {
     return <span>Loading...</span>;
@@ -21,7 +23,11 @@ export const UsersPage = () => {
       <h1>Users</h1>
       <ul>
         {data?.users.map((user) => {
-          return <li key={user.id}>{user.telegram}</li>;
+          return (
+            <li key={user.id}>
+              <Link to={getViewUserRoute({ userId: `${user.id}` })}>{user.telegram}</Link>
+            </li>
+          );
         })}
       </ul>
     </>

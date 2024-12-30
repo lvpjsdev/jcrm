@@ -1,10 +1,21 @@
-import { TRPCProvider } from './lib/trpc';
+import { User } from './entities/User';
+import { TRPCProvider } from './app/trpc';
 import { UsersPage } from './pages/users';
+import { BrowserRouter, Route, Routes } from 'react-router';
+import { getViewAllUsersRoute, getViewUserRoute, viewUsersRouteParams } from './app/routes';
+import { Layout } from './layouts/Layout/Layout';
 
 export const App = () => {
   return (
     <TRPCProvider>
-      <UsersPage />
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path={getViewAllUsersRoute()} element={<UsersPage />} />
+            <Route path={getViewUserRoute(viewUsersRouteParams)} element={<User />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </TRPCProvider>
   );
 };

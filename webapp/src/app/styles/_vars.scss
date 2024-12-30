@@ -1,0 +1,28 @@
+$piccolo: rgb(92 51 207);
+$hit: rgb(27 210 154);
+$beerus: rgb(220 222 227);
+$gohan: rgb(246 247 249);
+$goten: rgb(255 255 255);
+$goku: rgb(255 255 255);
+$bulma: rgb(0 0 0);
+$trunks: rgb(104 112 131);
+$popo: rgb(0 0 0);
+$heles: rgba(0 0 0 / 4%);
+
+$defaultFontFamily:
+  “DM Sans”,
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  Roboto,
+  Oxygen-Sans,
+  Ubuntu,
+  Cantarell,
+  'Helvetica Neue',
+  sans-serif;
+$defaultFontSize: 16px;
+$defaultBackgroundColor: $goku;
+$defaultTextColor: $bulma;
+$defaultLineHeight: 24px;
+
+$borderRadiusSmall: 0.5rem;

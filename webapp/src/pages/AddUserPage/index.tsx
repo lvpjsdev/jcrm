@@ -4,8 +4,6 @@ import { addUserZodSchema } from '../../../../backend/src/routes/addUser/input';
 import { trpc } from '../../app/trpc';
 import { Input } from '../../shared/ui/Input';
 
-// const NOW = new Date();
-
 export const AddUserPage = () => {
   const { mutateAsync } = trpc.addUser.useMutation();
   const formik = useFormik({
@@ -31,6 +29,8 @@ export const AddUserPage = () => {
           type="text"
           onChange={formik.handleChange}
           value={formik.values.telegram}
+          error={formik.errors.telegram}
+          disabled={formik.isSubmitting}
         />
         <Input
           name="email"
@@ -38,6 +38,8 @@ export const AddUserPage = () => {
           type="text"
           onChange={formik.handleChange}
           value={formik.values.email}
+          error={formik.errors.email}
+          disabled={formik.isSubmitting}
         />
         <Input
           name="startDate"
@@ -45,6 +47,8 @@ export const AddUserPage = () => {
           type="date"
           onChange={formik.handleChange}
           value={formik.values.startDate}
+          error={formik.errors.startDate}
+          disabled={formik.isSubmitting}
         />
         <Input
           name="period"
@@ -52,8 +56,12 @@ export const AddUserPage = () => {
           type="number"
           onChange={formik.handleChange}
           value={formik.values.period}
+          error={formik.errors.period}
+          disabled={formik.isSubmitting}
         />
-        <button type="submit">Add user</button>
+        <button disabled={formik.isSubmitting} type="submit">
+          {formik.isSubmitting ? 'Submitting...' : 'Add user'}
+        </button>
       </form>
     </section>
   );

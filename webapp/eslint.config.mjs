@@ -13,6 +13,18 @@ export default [
         project: './tsconfig.json',
       },
     },
+    rules: {
+      '@typescript-eslint/no-restricted-imports': {
+        error: true,
+        patterns: {
+          group: [
+            '@ideanick/backend/**',
+            '!@ideanick/backend/**/',
+            '!@ideanick/backend/**/input',
+          ],
+        },
+      },
+    },
   },
   {
     files: ['./vite.config.ts'],

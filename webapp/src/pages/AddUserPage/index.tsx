@@ -1,47 +1,30 @@
 import { useFormik } from 'formik';
 import { withZodSchema } from 'formik-validator-zod';
-import { z } from 'zod';
+import { addUserZodSchema } from '../../../../backend/src/routes/addUser/input';
+import { trpc } from '../../app/trpc';
 import { Input } from '../../shared/ui/Input';
 
-const NOW = new Date();
+// const NOW = new Date();
 
 export const AddUserPage = () => {
+  const { mutateAsync } = trpc.addUser.useMutation();
   const formik = useFormik({
     initialValues: {
-      name: '',
       telegram: '',
       email: '',
-      startDate: NOW,
+      startDate: '',
       period: 0,
     },
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values);
+      await mutateAsync({ ...values, startDate: values.startDate });
     },
-    validate: withZodSchema(
-      z.object({
-        name: z.string().min(3).max(20),
-        telegram: z
-          .string()
-          .min(3)
-          .max(20)
-          .regex(/[a-z0-9_]{5,32}/),
-        email: z.string().email(),
-        startDate: z.date().min(NOW),
-        period: z.number().min(1).max(100),
-      })
-    ),
+    validate: withZodSchema(addUserZodSchema),
   });
   return (
     <section>
       <h1>Add user</h1>
       <form onSubmit={formik.handleSubmit}>
-        <Input
-          name="name"
-          label="Name"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.name}
-        />
         <Input
           name="telegram"
           label="Telegram ID"

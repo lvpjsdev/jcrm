@@ -1,0 +1,12 @@
+import z from 'zod';
+
+export const addUserZodSchema = z.object({
+  telegram: z
+    .string()
+    .min(3)
+    .max(20)
+    .regex(/[a-z0-9_]{5,32}/),
+  email: z.string().email(),
+  startDate: z.string(),
+  period: z.number().min(1).max(100),
+});

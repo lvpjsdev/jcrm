@@ -1,4 +1,5 @@
 import { useFormik } from 'formik';
+import { Input } from '../../shared/ui/Input';
 
 export const AddUserPage = () => {
   const formik = useFormik({
@@ -17,15 +18,42 @@ export const AddUserPage = () => {
     <section>
       <h1>Add user</h1>
       <form onSubmit={formik.handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input
-          id="name"
+        <Input
           name="name"
+          label="Name"
           type="text"
           onChange={formik.handleChange}
           value={formik.values.name}
         />
-        <button type="submit">Add</button>
+        <Input
+          name="telegram"
+          label="Telegram ID"
+          type="text"
+          onChange={formik.handleChange}
+          value={formik.values.telegram}
+        />
+        <Input
+          name="email"
+          label="Email"
+          type="text"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+        />
+        <Input
+          name="startDate"
+          label="Start date"
+          type="date"
+          onChange={formik.handleChange}
+          value={formik.values.startDate}
+        />
+        <Input
+          name="period"
+          label="Validity period"
+          type="number"
+          onChange={formik.handleChange}
+          value={formik.values.period}
+        />
+        <button type="submit">Add user</button>
       </form>
     </section>
   );

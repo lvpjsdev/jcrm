@@ -5,7 +5,7 @@ type InputProps = {
   name: string;
   type: string;
   onChange: (e: ChangeEvent<unknown>) => void;
-  value: string | number;
+  value: string | number | Date;
 };
 
 export const Input: FC<InputProps> = ({ label, name, type, onChange, value }) => (

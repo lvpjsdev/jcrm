@@ -1,5 +1,9 @@
 import { useFormik } from 'formik';
+import { withZodSchema } from 'formik-validator-zod';
+import { z } from 'zod';
 import { Input } from '../../shared/ui/Input';
+
+const NOW = new Date();
 
 export const AddUserPage = () => {
   const formik = useFormik({
@@ -7,12 +11,25 @@ export const AddUserPage = () => {
       name: '',
       telegram: '',
       email: '',
-      startDate: '',
+      startDate: NOW,
       period: 0,
     },
     onSubmit: (values) => {
       console.log(values);
     },
+    validate: withZodSchema(
+      z.object({
+        name: z.string().min(3).max(20),
+        telegram: z
+          .string()
+          .min(3)
+          .max(20)
+          .regex(/[a-z0-9_]{5,32}/),
+        email: z.string().email(),
+        startDate: z.date().min(NOW),
+        period: z.number().min(1).max(100),
+      })
+    ),
   });
   return (
     <section>

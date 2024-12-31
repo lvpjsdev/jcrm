@@ -1,3 +1,4 @@
 # .husky/pre-commit
 pnpm lint-staged
+pnpm w stylecheck
 pnpm types

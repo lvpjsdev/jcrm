@@ -3,6 +3,7 @@ import { withZodSchema } from 'formik-validator-zod';
 import { addUserZodSchema } from '../../../../backend/src/routes/addUser/input';
 import { trpc } from '../../app/trpc';
 import { Input } from '../../shared/ui/Input';
+import { Button } from '../../shared/ui/Button';
 
 export const AddUserPage = () => {
   const { mutateAsync } = trpc.addUser.useMutation();
@@ -59,9 +60,9 @@ export const AddUserPage = () => {
           error={formik.errors.period}
           disabled={formik.isSubmitting}
         />
-        <button disabled={formik.isSubmitting} type="submit">
+        <Button disabled={formik.isSubmitting} type="submit">
           {formik.isSubmitting ? 'Submitting...' : 'Add user'}
-        </button>
+        </Button>
       </form>
     </section>
   );

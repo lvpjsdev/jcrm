@@ -1,3 +1,4 @@
+// colors
 $piccolo: rgb(92 51 207);
 $hit: rgb(27 210 154);
 $beerus: rgb(220 222 227);
@@ -7,7 +8,69 @@ $goku: rgb(255 255 255);
 $bulma: rgb(0 0 0);
 $trunks: rgb(104 112 131);
 $popo: rgb(0 0 0);
-$heles: rgba(0 0 0 / 4%);
+$jiren: rgb(2 51 201 / 0.12);
+$heles: rgb(0 0 0 / 4%);
+$roshi: #2e7d32;
+$heles: rgb(0 0 0 / 0.04);
+$zeno: rgb(0 0 0 / 0.56);
+
+// Supportive colors
+$krillin: rgb(255 179 25);
+// --krillin-60: 255 179 25 / 0.56;
+// --krillin-10: 255 179 25 / 0.08;
+$chichi: rgb(255 78 100);
+// --chichi-60: 255 78 100 / 0.56;
+// --chichi-10: 255 78 100 / 0.08;
+$roshi: rgb(73 179 86);
+// --roshi-60: 73 179 86 / 0.56;
+// --roshi-10: 73 179 86 / 0.08;
+$dodoria: rgb(211 48 48);
+// --dodoria-60: 211 48 48 / 0.56;
+// --dodoria-10: 211 48 48 / 0.08;
+$cell: rgb(149 241 213);
+// --cell-60: 149 241 213 / 0.56;
+// --cell-10: 149 241 213 / 0.08;
+$raditz: rgb(179 128 74);
+// --raditz-60: 179 128 74 / 0.56;
+// --raditz-10: 179 128 74 / 0.08;
+$whis: rgb(52 72 240);
+// --whis-60: 52 72 240 / 0.56;
+// --whis-10: 52 72 240 / 0.08;
+$frieza: rgb(92 51 207);
+// --frieza-60: 92 51 207 / 0.56;
+// --frieza-10: 92 51 207 / 0.08;
+$nappa: rgb(114 85 80);
+// --nappa-60: 114 85 80 / 0.56;
+// --nappa-10: 114 85 80 / 0.08;
+
+// BorderRadius
+$radius-xs: 0.25rem;
+$radius-sm: 0.5rem;
+$radius-md: 0.75rem;
+$radius-lg: 1rem;
+$border-width: 0.0625rem;
+
+// opacity
+$opacity: 0.6;
+
+// grid
+$spacing-size: 4px;
+$spacing-3xs: $spacing-size;
+$spacing-2xs: 2 * $spacing-size;
+$spacing-xs: 3 * $spacing-size;
+$spacing-sm: 4 * $spacing-size;
+$spacing-md: 5 * $spacing-size;
+$spacing-lg: 6 * $spacing-size;
+$spacing-xl: 7 * $spacing-size;
+$spacing-2xl: 8 * $spacing-size;
+$spacing-3xl: 9 * $spacing-size;
+
+// text sizes
+$text-xs: 12px;
+$text-sm: 14px;
+$text-md: 16px;
+$text-lg: 18px;
+$text-xl: 20px;
 
 $defaultFontFamily:
   'DM Sans',

@@ -1,0 +1,47 @@
+@use '../../../app/styles/vars' as *;
+
+.ok {
+  color: $roshi;
+  border-color: $roshi;
+}
+
+.error {
+  color: $chichi;
+  border-color: $chichi;
+}
+
+.icon {
+  flex: 0 0 1em;
+  padding: 0 $spacing-xs $spacing-sm 0;
+  font-size: 24px;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: $text-sm;
+  margin-right: auto;
+}
+
+.title {
+  font-weight: 600;
+  flex: 1 0 auto;
+}
+
+.text {
+  flex: 1 0 100%;
+  margin-top: -1rem;
+}
+
+.close {
+  font-size: 1.5em;
+}
+
+.alertContainer {
+  border: 1px solid;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  border-radius: $radius-md;
+  padding: $spacing-sm;
+}

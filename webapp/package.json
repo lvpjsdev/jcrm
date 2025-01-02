@@ -14,10 +14,12 @@
     "prettify": "prettier --log-level log --ignore-path ./.prettierignore --cache --write {src/**/*,*}.{ts,tsx,js,json,yml,scss}"
   },
   "dependencies": {
+    "@heathmont/moon-icons-tw": "^9.29.3",
     "@jcrm/backend": "workspace:*",
     "@tanstack/react-query": "^5.62.11",
     "@trpc/client": "11.0.0-rc.666",
     "@trpc/react-query": "11.0.0-rc.666",
+    "classnames": "^2.5.1",
     "formik": "^2.4.6",
     "formik-validator-zod": "^2.0.1",
     "include-media": "^2.0.0",

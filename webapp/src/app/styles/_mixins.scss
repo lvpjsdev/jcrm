@@ -17,6 +17,12 @@
   }
 }
 
+@mixin hover($elementColor) {
+  &:hover {
+    background-color: color.adjust($elementColor, $lightness: -4%);
+  }
+}
+
 @mixin h1 {
   font-size: 30px;
   font-weight: 600;

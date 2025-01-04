@@ -22,11 +22,11 @@ export const UsersPage = () => {
     <>
       <h1>Users</h1>
       <ul>
-        {data?.users.map((user) => (
-            <li key={user.id}>
-              <Link to={getViewUserRoute({ userId: `${user.id}` })}>{user.telegram}</Link>
-            </li>
-          ))}
+        {data?.map((user) => (
+          <li key={user.id}>
+            <Link to={getViewUserRoute({ userId: `${user.id}` })}>{user.telegram}</Link>
+          </li>
+        ))}
       </ul>
     </>
   );

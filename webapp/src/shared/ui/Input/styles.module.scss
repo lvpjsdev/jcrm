@@ -1,0 +1,46 @@
+@use '../../../app/styles/vars' as *;
+@use '../../../app/styles/mixins' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+
+  .input {
+    margin: $spacing-2xs 0;
+    width: 100%;
+    border-radius: $radius-xs;
+    padding: $spacing-2xs $spacing-xs;
+    background-color: $gohan;
+    font-family: $defaultFontFamily;
+    font-size: $text-sm;
+    line-height: $line-height-sm;
+    box-shadow: 0 4px 4px 0 rgba(0 0 0 / 25%);
+
+    @include hover($gohan);
+
+    &:hover {
+      border: 2px solid $beerus;
+    }
+
+    &:active {
+      border: 2px solid $piccolo;
+    }
+
+    &:disabled {
+      color: $trunks;
+      background-color: $beerus;
+      cursor: not-allowed;
+    }
+  }
+
+  .error {
+    border: 2px solid $chichi;
+  }
+
+  .infoText {
+    color: $chichi;
+    font-size: $text-xs;
+    line-height: $line-height-xs;
+  }
+}

@@ -67,10 +67,15 @@ $spacing-3xl: 9 * $spacing-size;
 
 // text sizes
 $text-xs: 12px;
+$line-height-xs: 16px;
 $text-sm: 14px;
+$line-height-sm: 20px;
 $text-md: 16px;
+$line-height-md: 24px;
 $text-lg: 18px;
+$line-height-lg: 28px;
 $text-xl: 20px;
+$line-height-xl: 28px;
 
 $defaultFontFamily:
   'DM Sans',
@@ -83,10 +88,10 @@ $defaultFontFamily:
   'Cantarell',
   'Helvetica Neue',
   sans-serif;
-$defaultFontSize: 16px;
+$defaultFontSize: $text-md;
+$defaultLineHeight: $line-height-md;
 $defaultBackgroundColor: $goku;
 $defaultTextColor: $bulma;
-$defaultLineHeight: 24px;
 
 $shadow-sm:
   0px 6px 6px -6px rgba(0, 0, 0, 0.16),

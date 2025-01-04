@@ -1,4 +1,6 @@
 import type { FC, ChangeEvent } from 'react';
+import cn from 'classnames';
+import styles from './styles.module.scss';
 
 type InputProps = {
   label: string;
@@ -19,10 +21,12 @@ export const Input: FC<InputProps> = ({
   disabled = false,
   error = '',
 }) => (
-  <div>
-    <label htmlFor={name}>{label}</label>
-    <br />
+  <div className={styles.container}>
+    <label htmlFor={name} className={styles.label}>
+      {label}
+    </label>
     <input
+      className={cn(styles.input, { error: !!error })}
       id={name}
       name={name}
       type={type}
@@ -30,8 +34,6 @@ export const Input: FC<InputProps> = ({
       value={value}
       disabled={disabled}
     />
-    <div>
-      <span style={{ color: 'red' }}>{error}</span>
-    </div>
+    <div className={styles.infoText}>{error}</div>
   </div>
 );

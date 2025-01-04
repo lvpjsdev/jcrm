@@ -1,11 +1,15 @@
 import { trpc } from '../../lib/trpc';
-import { users } from '../../lib/users';
 import { addUserZodSchema } from './input';
 
 export const addUserTRPCRoute = trpc.procedure
   .input(addUserZodSchema)
-  .mutation(({ input }) => {
-    console.log(input);
+  .mutation(async ({ input, ctx }) => {
+    const existUser = await ctx.prisma.user.findUnique({
+      where: { telegram: input.telegram },
+    });
+    if (existUser) {
+      throw new Error('User with this telegram already exist');
+    }
 
-    return users.unshift({ ...input, startDate: `${input.startDate}`, id: +new Date() });
+    await ctx.prisma.user.create({ data: input });
   });

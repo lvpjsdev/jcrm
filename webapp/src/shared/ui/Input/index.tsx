@@ -34,6 +34,6 @@ export const Input: FC<InputProps> = ({
       value={value}
       disabled={disabled}
     />
-    <div className={styles.infoText}>{error}</div>
+    {!!error && <div className={styles.infoText}>{error}</div>}
   </div>
 );

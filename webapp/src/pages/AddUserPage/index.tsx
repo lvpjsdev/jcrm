@@ -5,13 +5,21 @@ import { trpc } from '../../app/trpc';
 import { Input } from '../../shared/ui/Input';
 import { Button } from '../../shared/ui/Button';
 
+const formatDate = (date: Date | number) => {
+  return new Intl.DateTimeFormat('en-CA', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(date);
+};
+
 export const AddUserPage = () => {
   const { mutateAsync } = trpc.addUser.useMutation();
   const formik = useFormik({
     initialValues: {
       telegram: '',
       email: '',
-      startDate: '',
+      startDate: formatDate(new Date()),
       period: 0,
     },
     onSubmit: async (values) => {
@@ -48,7 +56,7 @@ export const AddUserPage = () => {
           type="date"
           onChange={formik.handleChange}
           value={formik.values.startDate}
-          error={formik.errors.startDate}
+          error={`${formik.errors.startDate}`}
           disabled={formik.isSubmitting}
         />
         <Input

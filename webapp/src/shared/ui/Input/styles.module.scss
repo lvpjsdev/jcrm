@@ -1,5 +1,6 @@
 @use '../../../app/styles/vars' as *;
 @use '../../../app/styles/mixins' as *;
+@use 'sass:color';
 
 .container {
   display: flex;
@@ -23,8 +24,14 @@
       border: 2px solid $beerus;
     }
 
+    &:focus {
+      border: 2px solid $piccolo;
+      box-shadow: 0 0 0 4px color.change($piccolo, $alpha: 20%);
+    }
+
     &:active {
       border: 2px solid $piccolo;
+      box-shadow: 0 0 0 4px color.change($piccolo, $alpha: 20%);
     }
 
     &:disabled {

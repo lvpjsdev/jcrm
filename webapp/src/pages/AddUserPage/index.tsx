@@ -56,7 +56,7 @@ export const AddUserPage = () => {
           type="date"
           onChange={formik.handleChange}
           value={formik.values.startDate}
-          error={`${formik.errors.startDate}`}
+          error={formik.errors.startDate}
           disabled={formik.isSubmitting}
         />
         <Input

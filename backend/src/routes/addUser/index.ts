@@ -11,5 +11,10 @@ export const addUserTRPCRoute = trpc.procedure
       throw new Error('User with this telegram already exist');
     }
 
-    await ctx.prisma.user.create({ data: input });
+    await ctx.prisma.user.create({
+      data: {
+        ...input,
+        startDate: new Date(input.startDate),
+      },
+    });
   });

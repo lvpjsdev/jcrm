@@ -10,7 +10,7 @@
     "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache .",
     "types": "tsc --noEmit --project ./tsconfig.json",
     "prettify": "prettier --log-level log --ignore-path ./.prettierignore --cache --write {src/**/*,*}.{ts,tsx,js,json,yml,scss}",
-    "prepare": "pmpm pgc"
+    "prepare": "pnpm pgc"
   },
   "keywords": [],
   "author": "",

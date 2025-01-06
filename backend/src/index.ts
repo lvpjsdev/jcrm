@@ -13,7 +13,7 @@ const main = async () => {
     const expressApp = express();
     expressApp.use(cors());
     ctx = createAppContext();
-    applyTRPCtoExpressApp(expressApp, ctx, trpcRouter);
+    await applyTRPCtoExpressApp(expressApp, ctx, trpcRouter);
     expressApp.listen(PORT, () => {
       console.log('Server started on port 3000');
     });

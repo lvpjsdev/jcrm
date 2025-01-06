@@ -19,4 +19,6 @@ model User {
   email     String   @unique
   startDate DateTime
   period    Int
+  password  String
+  createdAt DateTime @default(now())
 }

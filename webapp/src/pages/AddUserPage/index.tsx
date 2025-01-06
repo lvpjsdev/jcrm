@@ -21,6 +21,7 @@ export const AddUserPage = () => {
       email: '',
       startDate: formatDate(new Date()),
       period: 0,
+      password: '123',
     },
     onSubmit: async (values) => {
       console.log(values);

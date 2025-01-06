@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { trpc } from '../../lib/trpc';
 import { addUserZodSchema } from './input';
 
@@ -15,6 +16,7 @@ export const addUserTRPCRoute = trpc.procedure
       data: {
         ...input,
         startDate: new Date(input.startDate),
+        password: crypto.createHash('sha256').update(input.password).digest('hex'),
       },
     });
   });

@@ -9,4 +9,5 @@ export const addUserZodSchema = z.object({
   email: z.string().email(),
   startDate: z.string().date().or(z.date()),
   period: z.number().min(1).max(100),
+  password: z.string().min(1),
 });

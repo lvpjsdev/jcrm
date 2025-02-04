@@ -3,6 +3,7 @@ import { trpc } from '../lib/trpc';
 import { addUserTRPCRoute } from './addUser';
 import { getUserTRPCRoute } from './getUser';
 import { getUsersListTRPCRoute } from './getUsersList';
+import { signUpTRPCRoute } from './signUp';
 // @endindex
 
 export const trpcRouter = trpc.router({
@@ -10,6 +11,7 @@ export const trpcRouter = trpc.router({
   addUser: addUserTRPCRoute,
   getUser: getUserTRPCRoute,
   getUsersList: getUsersListTRPCRoute,
+  signUp: signUpTRPCRoute,
   // @endindex
 });
 

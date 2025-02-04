@@ -1,9 +1,10 @@
 import { useFormik } from 'formik';
 import { withZodSchema } from 'formik-validator-zod';
-import { addUserZodSchema } from '../../../../backend/src/routes/addUser/input';
+import { addUserZodSchema } from '@jcrm/backend/src/routes/addUser/input';
 import { trpc } from '../../app/trpc';
 import { Input } from '../../shared/ui/Input';
 import { Button } from '../../shared/ui/Button';
+import { z } from 'zod';
 
 const formatDate = (date: Date | number) => {
   return new Intl.DateTimeFormat('en-CA', {
@@ -27,7 +28,7 @@ export const AddUserPage = () => {
       console.log(values);
       await mutateAsync({ ...values, startDate: new Date(values.startDate) });
     },
-    validate: withZodSchema(addUserZodSchema),
+    validate: withZodSchema(addUserZodSchema.extend({ startDate: z.string() })),
   });
   return (
     <section>

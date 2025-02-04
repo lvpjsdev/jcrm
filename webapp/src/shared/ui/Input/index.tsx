@@ -6,8 +6,8 @@ type InputProps = {
   name: string;
   type: string;
   disabled?: boolean;
-  onChange: (e: ChangeEvent<unknown>) => void;
-  value: string | number;
+  onChange?: (e: ChangeEvent<unknown>) => void;
+  value?: string | number;
   error?: string;
 };
 

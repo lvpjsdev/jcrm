@@ -16,7 +16,7 @@ datasource db {
 model User {
   id        String        @id @default(uuid())
   telegram  String        @unique
-  email     String        @unique
+  email     String?       @unique
   startDate DateTime?
   period    Int?
   password  String

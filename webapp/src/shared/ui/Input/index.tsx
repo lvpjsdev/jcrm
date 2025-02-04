@@ -1,6 +1,5 @@
 import type { FC, ChangeEvent } from 'react';
-import cn from 'classnames';
-import styles from './styles.module.scss';
+import { Input as MantineInput } from '@mantine/core';
 
 type InputProps = {
   label: string;
@@ -21,12 +20,9 @@ export const Input: FC<InputProps> = ({
   disabled = false,
   error = '',
 }) => (
-  <div className={styles.container}>
-    <label htmlFor={name} className={styles.label}>
-      {label}
-    </label>
-    <input
-      className={cn(styles.input, { error: !!error })}
+  <MantineInput.Wrapper label={label} error={error}>
+    <MantineInput
+      mt={'xl'}
       id={name}
       name={name}
       type={type}
@@ -34,6 +30,5 @@ export const Input: FC<InputProps> = ({
       value={value}
       disabled={disabled}
     />
-    {!!error && <div className={styles.infoText}>{error}</div>}
-  </div>
+  </MantineInput.Wrapper>
 );

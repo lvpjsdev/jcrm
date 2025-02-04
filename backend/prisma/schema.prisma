@@ -14,11 +14,31 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  telegram  String   @unique
-  email     String   @unique
-  startDate DateTime
-  period    Int
+  id        String        @id @default(uuid())
+  telegram  String        @unique
+  email     String        @unique
+  startDate DateTime?
+  period    Int?
   password  String
-  createdAt DateTime @default(now())
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  keys      KeysOnUsers[]
+}
+
+model Key {
+  id        String        @id @default(uuid())
+  key       String        @unique
+  name      String?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  users     KeysOnUsers[]
+}
+
+model KeysOnUsers {
+  userId String
+  keyId  String
+  user   User   @relation(fields: [userId], references: [id])
+  key    Key    @relation(fields: [keyId], references: [id])
+
+  @@id([userId, keyId])
 }

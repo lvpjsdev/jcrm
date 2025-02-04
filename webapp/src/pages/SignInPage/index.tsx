@@ -4,9 +4,14 @@ import { useFormik } from 'formik';
 import { withZodSchema } from 'formik-validator-zod';
 import { signInInputZodSchema } from '@jcrm/backend/src/routes/signIn/input';
 import { trpc } from '../../app/trpc';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router';
+import { getViewAddUserRoute } from '../../app/routes';
 
 export const SignInPage = () => {
   const signIn = trpc.signIn.useMutation();
+  const trpcUtils = trpc.useUtils();
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       telegram: '',
@@ -14,8 +19,11 @@ export const SignInPage = () => {
     },
     validate: withZodSchema(signInInputZodSchema),
     onSubmit: async (values) => {
-      await signIn.mutateAsync(values);
+      const { token } = await signIn.mutateAsync(values);
+      Cookies.set('token', token, { expires: 30 });
       formik.resetForm();
+      void trpcUtils.invalidate();
+      navigate(getViewAddUserRoute());
     },
   });
 

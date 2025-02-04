@@ -1,10 +1,14 @@
-import crypto from 'crypto';
 import { trpc } from '../../lib/trpc';
+import { getPassHash } from '../../utils/getPassHash';
 import { addUserZodSchema } from './input';
 
 export const addUserTRPCRoute = trpc.procedure
   .input(addUserZodSchema)
   .mutation(async ({ input, ctx }) => {
+    if (!ctx.me) {
+      throw new Error('You are not authorized');
+    }
+
     const existUser = await ctx.prisma.user.findUnique({
       where: { telegram: input.telegram },
     });
@@ -16,7 +20,7 @@ export const addUserTRPCRoute = trpc.procedure
       data: {
         ...input,
         startDate: input.startDate,
-        password: crypto.createHash('sha256').update(input.password).digest('hex'),
+        password: getPassHash(input.password),
       },
     });
   });

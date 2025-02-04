@@ -1,6 +1,7 @@
-import crypto from 'crypto';
 import { TRPCError } from '@trpc/server';
 import { trpc } from '../../lib/trpc';
+import { getPassHash } from '../../utils/getPassHash';
+import { signJWT } from '../../utils/signJWT';
 import { signUpInputZodSchema } from './input';
 
 export const signUpTRPCRoute = trpc.procedure
@@ -21,14 +22,14 @@ export const signUpTRPCRoute = trpc.procedure
       });
     }
 
-    await ctx.prisma.user.create({
+    const { id } = await ctx.prisma.user.create({
       data: {
         telegram,
-        password: crypto.createHash('sha256').update(password).digest('hex'),
+        password: getPassHash(password),
       },
     });
 
     return {
-      success: true,
+      token: signJWT(id),
     };
   });

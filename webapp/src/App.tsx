@@ -11,6 +11,7 @@ import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import { SignUpPage } from './pages/SignUpPage';
 import { SignInPage } from './pages/SignInPage';
+import { SignOutPage } from './pages/SignOutPage';
 
 const theme = createTheme({
   /** Put your mantine theme override here */
@@ -21,6 +22,7 @@ export const App = () => (
     <MantineProvider theme={theme}>
       <BrowserRouter>
         <Routes>
+          <Route path={routes.getViewSignOutRoute()} element={<SignOutPage />} />
           <Route element={<Layout />}>
             <Route path={routes.getViewAllUsersRoute()} element={<UsersPage />} />
             <Route path={routes.getViewAddUserRoute()} element={<AddUserPage />} />

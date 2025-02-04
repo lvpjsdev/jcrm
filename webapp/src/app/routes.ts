@@ -15,3 +15,4 @@ export const getViewUserRoute = ({ userId }: ViewUsersRouteParams) => `/users/${
 export const getViewAddUserRoute = () => `/users/new`;
 export const getViewSignUpRoute = () => `/sign-up`;
 export const getViewSignInRoute = () => `/sign-in`;
+export const getViewSignOutRoute = () => `/sign-out`;

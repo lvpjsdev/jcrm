@@ -10,6 +10,7 @@ import { createTheme, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import { SignUpPage } from './pages/SignUpPage';
+import { SignInPage } from './pages/SignInPage';
 
 const theme = createTheme({
   /** Put your mantine theme override here */
@@ -28,6 +29,7 @@ export const App = () => (
               element={<User />}
             />
             <Route path={routes.getViewSignUpRoute()} element={<SignUpPage />} />
+            <Route path={routes.getViewSignInRoute()} element={<SignInPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

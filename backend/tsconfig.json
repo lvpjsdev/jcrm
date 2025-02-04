@@ -4,23 +4,25 @@
     "transpileOnly": true
   },
   "compilerOptions": {
+    "outDir": "./dist",
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "sourceMap": true,
+    "sourceRoot": "/",
+    "resolveJsonModule": true,
     "inlineSources": true,
     "isolatedModules": false,
     "lib": ["ES2021"],
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
-    "outDir": "./dist",
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "strict": true,
-    "target": "ESNext"
+    "module": "commonjs",
+    "moduleResolution": "Node",
+    "target": "ES2021"
   },
   "include": ["src"]
 }

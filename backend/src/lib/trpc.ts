@@ -21,10 +21,11 @@ export const applyTRPCtoExpressApp = async (
   );
 
   expressApp.use(
-    '/trpc/playground',
+    '/trpc-playground',
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call
     await expressHandler({
       trpcApiEndpoint: '/trpc',
-      playgroundEndpoint: '/trpc/playground',
+      playgroundEndpoint: '/trpc-playground',
       router: trpcRouter,
     })
   );

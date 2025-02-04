@@ -15,7 +15,7 @@ export const addUserTRPCRoute = trpc.procedure
     await ctx.prisma.user.create({
       data: {
         ...input,
-        startDate: new Date(input.startDate),
+        startDate: input.startDate,
         password: crypto.createHash('sha256').update(input.password).digest('hex'),
       },
     });

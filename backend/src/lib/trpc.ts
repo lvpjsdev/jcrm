@@ -1,11 +1,14 @@
 import { initTRPC } from '@trpc/server';
 import * as trpcExpress from '@trpc/server/adapters/express';
 import type { Express } from 'express';
+import superjson from 'superjson';
 import { expressHandler } from 'trpc-playground/handlers/express';
 import type { TRPCRouter } from '../routes';
 import type { AppContext } from './ctx';
 
-export const trpc = initTRPC.context<AppContext>().create();
+export const trpc = initTRPC.context<AppContext>().create({
+  transformer: superjson,
+});
 
 export const applyTRPCtoExpressApp = async (
   expressApp: Express,
@@ -27,6 +30,9 @@ export const applyTRPCtoExpressApp = async (
       trpcApiEndpoint: '/trpc',
       playgroundEndpoint: '/trpc-playground',
       router: trpcRouter,
+      request: {
+        superjson: true,
+      },
     })
   );
 };

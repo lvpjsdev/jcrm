@@ -25,7 +25,7 @@ export const AddUserPage = () => {
     },
     onSubmit: async (values) => {
       console.log(values);
-      await mutateAsync({ ...values });
+      await mutateAsync({ ...values, startDate: new Date(values.startDate) });
     },
     validate: withZodSchema(addUserZodSchema),
   });

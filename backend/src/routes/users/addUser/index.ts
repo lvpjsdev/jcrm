@@ -1,5 +1,5 @@
-import { trpc } from '../../lib/trpc';
-import { getPassHash } from '../../utils/getPassHash';
+import { trpc } from '../../../lib/trpc';
+import { getPassHash } from '../../../utils/getPassHash';
 import { addUserZodSchema } from './input';
 
 export const addUserTRPCRoute = trpc.procedure

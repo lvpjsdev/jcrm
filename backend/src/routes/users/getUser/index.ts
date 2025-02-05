@@ -1,5 +1,5 @@
 import z from 'zod';
-import { trpc } from '../../lib/trpc';
+import { trpc } from '../../../lib/trpc';
 
 export const getUserTRPCRoute = trpc.procedure
   .input(z.object({ userId: z.string() }))

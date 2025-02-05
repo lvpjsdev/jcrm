@@ -1,4 +1,4 @@
-import { trpc } from '../../lib/trpc';
+import { trpc } from '../../../lib/trpc';
 
 export const getMeTRPCRoute = trpc.procedure.query(({ ctx }) => ({
   me: ctx.me && {

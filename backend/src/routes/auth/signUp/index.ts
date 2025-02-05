@@ -1,7 +1,7 @@
 import { TRPCError } from '@trpc/server';
-import { trpc } from '../../lib/trpc';
-import { getPassHash } from '../../utils/getPassHash';
-import { signJWT } from '../../utils/signJWT';
+import { trpc } from '../../../lib/trpc';
+import { getPassHash } from '../../../utils/getPassHash';
+import { signJWT } from '../../../utils/signJWT';
 import { signUpInputZodSchema } from './input';
 
 export const signUpTRPCRoute = trpc.procedure

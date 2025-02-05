@@ -1,21 +1,35 @@
 import { trpc } from '../lib/trpc';
 // @index('./**/index.ts', f => `import { ${f.path.split('/').slice(0, -1).pop()}TRPCRoute } from '${f.path.split('/').slice(0, -1).join('/')}'`)
-import { addUserTRPCRoute } from './addUser';
-import { getMeTRPCRoute } from './getMe';
-import { getUserTRPCRoute } from './getUser';
-import { getUsersListTRPCRoute } from './getUsersList';
-import { signInTRPCRoute } from './signIn';
-import { signUpTRPCRoute } from './signUp';
+import { getMeTRPCRoute } from './auth/getMe';
+import { signInTRPCRoute } from './auth/signIn';
+import { signUpTRPCRoute } from './auth/signUp';
+import { addKeyTRPCRoute } from './keys/addKey';
+import { getKeyTRPCRoute } from './keys/getKey';
+import { getKeysListTRPCRoute } from './keys/getKeysList';
+import { removeKeyTRPCRoute } from './keys/removeKey';
+import { updateKeyTRPCRoute } from './keys/updateKey';
+import { addUserTRPCRoute } from './users/addUser';
+import { getUserTRPCRoute } from './users/getUser';
+import { getUsersListTRPCRoute } from './users/getUsersList';
+import { removeUserTRPCRoute } from './users/removeUser';
+import { updateUserTRPCRoute } from './users/updateUser';
 // @endindex
 
 export const trpcRouter = trpc.router({
   // @index('./**/index.ts', f => `${f.path.split('/').slice(0, -1).pop()}: ${f.path.split('/').slice(0, -1).pop()}TRPCRoute,`)
-  addUser: addUserTRPCRoute,
   getMe: getMeTRPCRoute,
-  getUser: getUserTRPCRoute,
-  getUsersList: getUsersListTRPCRoute,
   signIn: signInTRPCRoute,
   signUp: signUpTRPCRoute,
+  addKey: addKeyTRPCRoute,
+  getKey: getKeyTRPCRoute,
+  getKeysList: getKeysListTRPCRoute,
+  removeKey: removeKeyTRPCRoute,
+  updateKey: updateKeyTRPCRoute,
+  addUser: addUserTRPCRoute,
+  getUser: getUserTRPCRoute,
+  getUsersList: getUsersListTRPCRoute,
+  removeUser: removeUserTRPCRoute,
+  updateUser: updateUserTRPCRoute,
   // @endindex
 });
 

@@ -22,7 +22,6 @@ export const Input: FC<InputProps> = ({
 }) => (
   <MantineInput.Wrapper label={label} error={error}>
     <MantineInput
-      mt={'xl'}
       id={name}
       name={name}
       type={type}

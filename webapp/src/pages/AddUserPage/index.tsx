@@ -48,9 +48,10 @@ export const AddUserPage = () => {
         <DateInput
           name="startDate"
           label="Start date"
-          onChange={formik.handleChange}
+          // eslint-disable-next-line no-void
+          onChange={(date) => void formik.setFieldValue('startDate', date)}
           value={formik.values.startDate}
-          error={`${formik.errors.startDate}`}
+          error={formik.errors.startDate && `${formik.errors.startDate}`}
           disabled={formik.isSubmitting}
         />
         <Input

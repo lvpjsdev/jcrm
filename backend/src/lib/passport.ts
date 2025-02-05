@@ -40,6 +40,9 @@ export const applyPassportToExpressApp = (expressApp: Express, ctx: AppContext):
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    passport.authenticate('jwt', { session: false })(req, res, next);
+    passport.authenticate('jwt', { session: false }, (...args: unknown[]) => {
+      req.user = args[1] || undefined;
+      next();
+    })(req, res, next);
   });
 };

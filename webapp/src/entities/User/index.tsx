@@ -1,17 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-type-assertion */
 import type { FC } from 'react';
-import { useParams } from 'react-router';
-import type { ViewUsersRouteParams } from '../../app/routes';
+import { Link, useParams } from 'react-router';
+import { getViewUpdateUserRoute, type ViewUsersRouteParams } from '../../app/routes';
 import { trpc } from '../../app/trpc';
 
-// interface UserProps {
-//   id: number;
-//   //   telegram: string;
-//   //   email: string;
-//   //   startDate: string;
-//   //   period: number;
-// }
-
+// eslint-disable-next-line complexity
 export const User: FC = () => {
   const { userId } = useParams() as ViewUsersRouteParams;
 
@@ -38,8 +31,9 @@ export const User: FC = () => {
     <section>
       <h1>{userId}</h1>
       <div>{email}</div>
-      <div>{startDate}</div>
+      <div>{startDate?.toLocaleDateString()}</div>
       <div>{period}</div>
+      <Link to={getViewUpdateUserRoute({ userId })}>Edit</Link>
     </section>
   );
 };

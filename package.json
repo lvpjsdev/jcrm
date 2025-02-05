@@ -25,6 +25,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
+    "eslint-plugin-node": "^11.1.0",
     "superjson": "^2.2.2"
   }
 }

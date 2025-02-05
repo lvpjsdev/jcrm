@@ -1,18 +1,16 @@
+import { addUserZodSchema } from '@jcrm/backend/src/routes/addUser/input';
 import { useFormik } from 'formik';
 import { withZodSchema } from 'formik-validator-zod';
-import { addUserZodSchema } from '@jcrm/backend/src/routes/addUser/input';
-import { trpc } from '../../app/trpc';
-import { Input } from '../../shared/ui/Input';
-import { Button } from '../../shared/ui/Button';
 import { z } from 'zod';
+import { trpc } from '../../app/trpc';
+import { Button } from '../../shared/ui/Button';
+import { Input } from '../../shared/ui/Input';
 
-const formatDate = (date: Date | number) => {
-  return new Intl.DateTimeFormat('en-CA', {
+const formatDate = (date: Date | number) => new Intl.DateTimeFormat('en-CA', {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
   }).format(date);
-};
 
 export const AddUserPage = () => {
   const { mutateAsync } = trpc.addUser.useMutation();

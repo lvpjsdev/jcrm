@@ -1,12 +1,12 @@
+import { signInInputZodSchema } from '@jcrm/backend/src/routes/signIn/input';
 import { Paper, Button } from '@mantine/core';
-import { Input } from '../../shared/ui/Input';
 import { useFormik } from 'formik';
 import { withZodSchema } from 'formik-validator-zod';
-import { signInInputZodSchema } from '@jcrm/backend/src/routes/signIn/input';
-import { trpc } from '../../app/trpc';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
 import { getViewAddUserRoute } from '../../app/routes';
+import { trpc } from '../../app/trpc';
+import { Input } from '../../shared/ui/Input';
 
 export const SignInPage = () => {
   const signIn = trpc.signIn.useMutation();
@@ -23,7 +23,7 @@ export const SignInPage = () => {
       Cookies.set('token', token, { expires: 30 });
       formik.resetForm();
       void trpcUtils.invalidate();
-      navigate(getViewAddUserRoute());
+      void navigate(getViewAddUserRoute());
     },
   });
 

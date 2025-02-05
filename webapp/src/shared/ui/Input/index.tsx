@@ -1,5 +1,5 @@
-import type { FC, ChangeEvent } from 'react';
 import { Input as MantineInput } from '@mantine/core';
+import type { FC, ChangeEvent } from 'react';
 
 type InputProps = {
   label: string;

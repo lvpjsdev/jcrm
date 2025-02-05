@@ -1,13 +1,13 @@
+import { signUpInputZodSchema } from '@jcrm/backend/src/routes/signUp/input';
 import { Button, Paper } from '@mantine/core';
-import { Input } from '../../shared/ui/Input';
-import { trpc } from '../../app/trpc';
 import { useFormik } from 'formik';
 import { withZodSchema } from 'formik-validator-zod';
-import { signUpInputZodSchema } from '@jcrm/backend/src/routes/signUp/input';
-import { z } from 'zod';
-import { getViewAllUsersRoute } from '../../app/routes';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
+import { z } from 'zod';
+import { getViewAllUsersRoute } from '../../app/routes';
+import { trpc } from '../../app/trpc';
+import { Input } from '../../shared/ui/Input';
 
 export const SignUpPage = () => {
   const signUp = trpc.signUp.useMutation();
@@ -36,8 +36,9 @@ export const SignUpPage = () => {
       const { token } = await signUp.mutateAsync(values);
       Cookies.set('token', token, { expires: 1 });
       formik.resetForm();
-      void trpcUtils.invalidate();
-      navigate(getViewAllUsersRoute());
+      void trpcUtils.invalidate().then(async () => {
+        await navigate(getViewAllUsersRoute());
+      });
     },
   });
 

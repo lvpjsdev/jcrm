@@ -14,16 +14,19 @@ export default [
       },
     },
     rules: {
-      '@typescript-eslint/no-restricted-imports': {
-        error: true,
-        patterns: {
-          group: [
-            '@ideanick/backend/**',
-            '!@ideanick/backend/**/',
-            '!@ideanick/backend/**/input',
-          ],
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: ['@ideanick/backend/**', '!@ideanick/backend/**/input'],
         },
-      },
+      ],
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: '[object.type=MetaProperty][property.name=env]',
+          message: 'Use import { env } from "app/env" instead',
+        },
+      ],
     },
   },
   {

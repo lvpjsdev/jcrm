@@ -1,8 +1,8 @@
+import { Divider } from '@mantine/core';
 import { Link, Outlet } from 'react-router';
 import * as routes from '../../app/routes';
-import styles from './index.module.scss';
-import { Divider } from '@mantine/core';
 import { trpc } from '../../app/trpc';
+import styles from './index.module.scss';
 
 export const Layout = () => {
   const { data } = trpc.getMe.useQuery();
@@ -27,7 +27,7 @@ export const Layout = () => {
               <Divider />
               <li>
                 <Link className={styles.link} to={routes.getViewSignOutRoute()}>
-                  Sign Out {`(${data?.me.telegram})`}
+                  Sign Out {`(${data.me.telegram})`}
                 </Link>
               </li>
             </>

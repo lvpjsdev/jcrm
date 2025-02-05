@@ -1,3 +1,4 @@
+import { createTheme, MantineProvider } from '@mantine/core';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import * as routes from './app/routes';
 import { TRPCProvider } from './app/trpc';
@@ -5,13 +6,12 @@ import { User } from './entities/User';
 import { Layout } from './layouts/Layout/Layout';
 import './app/styles/global.scss';
 import { AddUserPage } from './pages/AddUserPage';
-import { UsersPage } from './pages/UsersList';
-import { createTheme, MantineProvider } from '@mantine/core';
-import '@mantine/core/styles.css';
-import '@mantine/dates/styles.css';
-import { SignUpPage } from './pages/SignUpPage';
 import { SignInPage } from './pages/SignInPage';
 import { SignOutPage } from './pages/SignOutPage';
+import { SignUpPage } from './pages/SignUpPage';
+import { UsersPage } from './pages/UsersList';
+import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
 
 const theme = createTheme({
   /** Put your mantine theme override here */

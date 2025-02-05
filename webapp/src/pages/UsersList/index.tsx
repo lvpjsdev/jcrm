@@ -24,7 +24,7 @@ export const UsersPage = () => {
       <ul>
         {data?.map((user) => (
           <li key={user.id}>
-            <Link to={getViewUserRoute({ userId: `${user.id}` })}>{user.telegram}</Link>
+            <Link to={getViewUserRoute({ userId: user.id })}>{user.telegram}</Link>
           </li>
         ))}
       </ul>

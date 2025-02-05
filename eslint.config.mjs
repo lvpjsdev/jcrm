@@ -1,5 +1,6 @@
 import love from 'eslint-config-love';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import eslintPluginNode from 'eslint-plugin-node';
 
 export default [
   {
@@ -8,6 +9,7 @@ export default [
       'dist/**',
       '**/*.mjs',
       'eslint.config.mjs',
+      'postcss.config.cjs',
       '**/*.js',
       'node_modules',
     ],
@@ -23,6 +25,10 @@ export default [
       'eslint.config.mjs',
       '**/*.js',
     ],
+    files: ['src/**/*.{ts,tsx}', 'backend/**/*.ts', 'webapp/**/*.{ts,tsx}'],
+    plugins: {
+      node: eslintPluginNode,
+    },
     rules: {
       'import/order': [
         'error',
@@ -47,6 +53,7 @@ export default [
       'jsx-a11y/anchor-is-valid': 'off',
       'eslint-comments/require-description': 'off',
       'react/react-in-jsx-scope': 'off',
+      'node/no-process-env': ['error'],
 
       curly: ['error', 'all'],
 

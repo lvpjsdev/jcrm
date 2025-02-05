@@ -1,11 +1,10 @@
 import cors from 'cors';
 import express from 'express';
 import { type AppContext, createAppContext } from './lib/ctx';
+import { env } from './lib/env';
 import { applyPassportToExpressApp } from './lib/passport';
 import { applyTRPCtoExpressApp } from './lib/trpc';
 import { trpcRouter } from './routes';
-
-const PORT = 3000;
 
 let ctx: AppContext | null = null;
 
@@ -16,8 +15,8 @@ const main = async () => {
     ctx = createAppContext();
     applyPassportToExpressApp(expressApp, ctx);
     await applyTRPCtoExpressApp(expressApp, ctx, trpcRouter);
-    expressApp.listen(PORT, () => {
-      console.log('Server started on port 3000');
+    expressApp.listen(env.PORT, () => {
+      console.log(`Server started on port ${env.PORT}`);
     });
   } catch (error) {
     console.error(error);

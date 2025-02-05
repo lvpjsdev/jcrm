@@ -27,6 +27,20 @@ export const Navigation: FC = () => {
                 to={routes.getViewAddUserRoute()}
               />
             </li>
+            <li>
+              <NavLink
+                component={Link}
+                label="All keys"
+                to={routes.getViewKeysListRoute()}
+              />
+            </li>
+            <li>
+              <NavLink
+                component={Link}
+                label="Add key"
+                to={routes.getViewAddKeyRoute()}
+              />
+            </li>
             <Divider />
             <li>
               <NavLink

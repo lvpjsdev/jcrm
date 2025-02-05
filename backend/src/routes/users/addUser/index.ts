@@ -21,6 +21,9 @@ export const addUserTRPCRoute = trpc.procedure
         ...input,
         startDate: input.startDate,
         password: getPassHash(input.password),
+        keys: {
+          create: input.keys.map((key) => ({ keyId: key })),
+        },
       },
     });
   });

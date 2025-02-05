@@ -1,6 +1,6 @@
 /* eslint-disable complexity */
 import { updateUserZodSchema } from '@jcrm/backend/src/routes/users/updateUser/input';
-import { Alert, Button } from '@mantine/core';
+import { Alert, Button, MultiSelect } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { useParams } from 'react-router';
 import { useForm } from '../../app/form';
@@ -12,6 +12,7 @@ export const UpdateUserPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   const { userId } = useParams() as ViewUsersRouteParams;
   const { data } = trpc.getUser.useQuery({ userId });
+  const { data: keys } = trpc.getKeysList.useQuery();
   const { mutateAsync } = trpc.updateUser.useMutation();
 
   const { formik, alertProps, buttonProps } = useForm({
@@ -20,6 +21,7 @@ export const UpdateUserPage = () => {
       email: data?.email || '',
       startDate: data?.startDate || new Date(),
       period: data?.period || 0,
+      keys: keys?.map((key) => key.id) || [],
     },
     onSubmit: async (values) => {
       console.log(values);
@@ -27,6 +29,11 @@ export const UpdateUserPage = () => {
     },
     validationSchema: updateUserZodSchema,
   });
+
+  const keysOptions = keys?.map((key) => ({
+    value: key.id,
+    label: key.name || key.id,
+  }));
 
   return (
     <section>
@@ -66,6 +73,15 @@ export const UpdateUserPage = () => {
           onChange={formik.handleChange}
           value={formik.values.period}
           error={formik.errors.period}
+          disabled={formik.isSubmitting}
+        />
+        <MultiSelect
+          name="keys"
+          label="Keys"
+          data={keysOptions}
+          // eslint-disable-next-line no-void
+          onChange={(value) => void formik.setFieldValue('keys', value)}
+          value={formik.values.keys}
           disabled={formik.isSubmitting}
         />
         <Button {...buttonProps} type="submit">

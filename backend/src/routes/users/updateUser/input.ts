@@ -5,4 +5,5 @@ export const updateUserZodSchema = z.object({
   email: z.string().email().optional(),
   startDate: z.date().optional(),
   period: z.number().min(1).max(100).optional(),
+  keys: z.array(z.string()).optional(),
 });

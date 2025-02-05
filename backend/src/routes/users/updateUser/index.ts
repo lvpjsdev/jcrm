@@ -14,6 +14,14 @@ export const updateUserTRPCRoute = trpc.procedure
         where: { id: input.id },
         data: {
           ...input,
+          keys: {
+            set: input.keys?.map((keyId) => ({
+              userId_keyId: {
+                userId: input.id,
+                keyId,
+              },
+            })),
+          },
         },
       });
     } catch (error) {

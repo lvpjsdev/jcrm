@@ -1,5 +1,5 @@
 import { addUserZodSchema } from '@jcrm/backend/src/routes/users/addUser/input';
-import { Alert, Button } from '@mantine/core';
+import { Alert, Button, MultiSelect } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { useForm } from '../../app/form';
 import { trpc } from '../../app/trpc';
@@ -7,6 +7,7 @@ import { Input } from '../../shared/ui/Input';
 
 export const AddUserPage = () => {
   const { mutateAsync } = trpc.addUser.useMutation();
+  const { data: keys } = trpc.getKeysList.useQuery();
 
   const { formik, alertProps, buttonProps } = useForm({
     initialValues: {
@@ -15,12 +16,18 @@ export const AddUserPage = () => {
       startDate: new Date(),
       period: 0,
       password: '123',
+      keys: [],
     },
     onSubmit: async (values) => {
       await mutateAsync({ ...values, startDate: new Date(values.startDate) });
     },
     validationSchema: addUserZodSchema,
   });
+
+  const keysOptions = keys?.map((key) => ({
+    value: key.id,
+    label: key.name || key.id,
+  }));
 
   return (
     <section>
@@ -60,6 +67,15 @@ export const AddUserPage = () => {
           onChange={formik.handleChange}
           value={formik.values.period}
           error={formik.errors.period}
+          disabled={formik.isSubmitting}
+        />
+        <MultiSelect
+          name="keys"
+          label="Keys"
+          data={keysOptions}
+          // eslint-disable-next-line no-void
+          onChange={(value) => void formik.setFieldValue('keys', value)}
+          value={formik.values.keys}
           disabled={formik.isSubmitting}
         />
         <Button {...buttonProps} type="submit">

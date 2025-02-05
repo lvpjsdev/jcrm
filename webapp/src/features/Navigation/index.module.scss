@@ -1,0 +1,47 @@
+@use '../../app/styles/vars' as *;
+@use '../../app/styles/mixins' as *;
+@use '../../../node_modules/include-media/dist/include-media' as *;
+
+$breakpoint: '<=900px';
+
+.logo {
+  @include h1;
+}
+
+.link {
+  @include link;
+}
+
+.layout {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 100%;
+
+  @include media($breakpoint) {
+    flex-flow: column nowrap;
+  }
+
+  .navigation {
+    height: 100%;
+    overflow: auto;
+    flex: 0 0 236px;
+    padding: 20px 32px;
+    border-right: 1px solid $beerus;
+
+    @include media($breakpoint) {
+      overflow: visible;
+      flex: 0 0 auto;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid $beerus;
+    }
+
+    .menu {
+      padding: 20px 0;
+    }
+  }
+
+  .content {
+    padding: 20px 20px;
+  }
+}

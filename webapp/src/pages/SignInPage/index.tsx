@@ -1,9 +1,8 @@
-import { signInInputZodSchema } from '@jcrm/backend/src/routes/signIn/input';
+import { signInInputZodSchema } from '@jcrm/backend/src/routes/auth/signIn/input';
 import { Paper, Button } from '@mantine/core';
-import { useFormik } from 'formik';
-import { withZodSchema } from 'formik-validator-zod';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
+import { useForm } from '../../app/form';
 import { getViewAddUserRoute } from '../../app/routes';
 import { trpc } from '../../app/trpc';
 import { Input } from '../../shared/ui/Input';
@@ -12,12 +11,13 @@ export const SignInPage = () => {
   const signIn = trpc.signIn.useMutation();
   const trpcUtils = trpc.useUtils();
   const navigate = useNavigate();
-  const formik = useFormik({
+
+  const { formik, buttonProps } = useForm({
     initialValues: {
       telegram: '',
       password: '',
     },
-    validate: withZodSchema(signInInputZodSchema),
+    validationSchema: signInInputZodSchema,
     onSubmit: async (values) => {
       const { token } = await signIn.mutateAsync(values);
       Cookies.set('token', token, { expires: 30 });
@@ -47,7 +47,9 @@ export const SignInPage = () => {
             onChange={formik.handleChange}
             error={formik.errors.password}
           />
-          <Button type="submit">Sign In</Button>
+          <Button {...buttonProps} type="submit">
+            Sign In
+          </Button>
         </form>
       </Paper>
     </div>

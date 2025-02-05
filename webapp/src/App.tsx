@@ -14,9 +14,7 @@ import { UsersPage } from './pages/UsersList';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 
-const theme = createTheme({
-  /** Put your mantine theme override here */
-});
+const theme = createTheme({});
 
 export const App = () => (
   <TRPCProvider>

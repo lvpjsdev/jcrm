@@ -1,10 +1,11 @@
-import { signUpInputZodSchema } from '@jcrm/backend/src/routes/signUp/input';
+import { signUpInputZodSchema } from '@jcrm/backend/src/routes/auth/signUp/input';
 import { Button, Paper } from '@mantine/core';
 import { useFormik } from 'formik';
 import { withZodSchema } from 'formik-validator-zod';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
 import { z } from 'zod';
+import { useForm } from '../../app/form';
 import { getViewAllUsersRoute } from '../../app/routes';
 import { trpc } from '../../app/trpc';
 import { Input } from '../../shared/ui/Input';
@@ -14,24 +15,22 @@ export const SignUpPage = () => {
   const navigate = useNavigate();
   const trpcUtils = trpc.useUtils();
 
-  const formik = useFormik({
+  const { formik, buttonProps } = useForm({
     initialValues: {
       telegram: '',
       password: '',
       confirmPassword: '',
     },
-    validate: withZodSchema(
-      signUpInputZodSchema
-        .extend({ confirmPassword: z.string().min(1) })
-        .superRefine((val, ctx) => {
-          if (val.password !== val.confirmPassword) {
-            ctx.addIssue({
-              code: z.ZodIssueCode.custom,
-              message: 'Passwords do not match',
-            });
-          }
-        })
-    ),
+    validationSchema: signUpInputZodSchema
+      .extend({ confirmPassword: z.string().min(1) })
+      .superRefine((val, ctx) => {
+        if (val.password !== val.confirmPassword) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Passwords do not match',
+          });
+        }
+      }),
     onSubmit: async (values) => {
       const { token } = await signUp.mutateAsync(values);
       Cookies.set('token', token, { expires: 1 });
@@ -70,7 +69,9 @@ export const SignUpPage = () => {
             onChange={formik.handleChange}
             error={formik.errors.confirmPassword}
           />
-          <Button type="submit">Sign Up</Button>
+          <Button {...buttonProps} type="submit">
+            Sign Up
+          </Button>
         </form>
       </Paper>
     </div>

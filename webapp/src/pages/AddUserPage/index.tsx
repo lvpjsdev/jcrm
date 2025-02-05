@@ -1,24 +1,18 @@
-import { addUserZodSchema } from '@jcrm/backend/src/routes/addUser/input';
-import { useFormik } from 'formik';
-import { withZodSchema } from 'formik-validator-zod';
-import { z } from 'zod';
+import { addUserZodSchema } from '@jcrm/backend/src/routes/users/addUser/input';
+import { Alert, Button } from '@mantine/core';
+import { DateInput } from '@mantine/dates';
+import { useForm } from '../../app/form';
 import { trpc } from '../../app/trpc';
-import { Button } from '../../shared/ui/Button';
 import { Input } from '../../shared/ui/Input';
-
-const formatDate = (date: Date | number) => new Intl.DateTimeFormat('en-CA', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  }).format(date);
 
 export const AddUserPage = () => {
   const { mutateAsync } = trpc.addUser.useMutation();
-  const formik = useFormik({
+
+  const { formik, alertProps, buttonProps } = useForm({
     initialValues: {
       telegram: '',
       email: '',
-      startDate: formatDate(new Date()),
+      startDate: new Date(),
       period: 0,
       password: '123',
     },
@@ -26,8 +20,9 @@ export const AddUserPage = () => {
       console.log(values);
       await mutateAsync({ ...values, startDate: new Date(values.startDate) });
     },
-    validate: withZodSchema(addUserZodSchema.extend({ startDate: z.string() })),
+    validationSchema: addUserZodSchema,
   });
+
   return (
     <section>
       <h1>Add user</h1>
@@ -50,13 +45,12 @@ export const AddUserPage = () => {
           error={formik.errors.email}
           disabled={formik.isSubmitting}
         />
-        <Input
+        <DateInput
           name="startDate"
           label="Start date"
-          type="date"
           onChange={formik.handleChange}
           value={formik.values.startDate}
-          error={formik.errors.startDate}
+          error={`${formik.errors.startDate}`}
           disabled={formik.isSubmitting}
         />
         <Input
@@ -68,9 +62,10 @@ export const AddUserPage = () => {
           error={formik.errors.period}
           disabled={formik.isSubmitting}
         />
-        <Button disabled={formik.isSubmitting} type="submit">
+        <Button {...buttonProps} type="submit">
           {formik.isSubmitting ? 'Submitting...' : 'Add user'}
         </Button>
+        <Alert {...alertProps} />
       </form>
     </section>
   );

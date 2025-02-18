@@ -1,7 +1,6 @@
-/* eslint-disable complexity */
 import type { FC } from 'react';
 import { useNavigate, Outlet } from 'react-router';
-import { trpc } from '../../app/trpc';
+import { useMe } from '../../app/ctx';
 
 type ProtectedRouteProps = {
   isAllowed:
@@ -17,9 +16,9 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({
   children,
 }) => {
   const navigate = useNavigate();
-  const { data } = trpc.getMe.useQuery();
+  const me = useMe();
 
-  const isAllowed = typeof allowed === 'function' ? allowed(data?.me) : allowed;
+  const isAllowed = typeof allowed === 'function' ? allowed(me) : allowed;
 
   if (!isAllowed) {
     void navigate(redirectPath);

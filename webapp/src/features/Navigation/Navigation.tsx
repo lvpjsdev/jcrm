@@ -1,17 +1,18 @@
 import { Divider, NavLink } from '@mantine/core';
 import type { FC } from 'react';
 import { NavLink as Link } from 'react-router';
+import { useMe } from '../../app/ctx';
 import * as routes from '../../app/routes';
-import { trpc } from '../../app/trpc';
 import styles from './index.module.scss';
 
 export const Navigation: FC = () => {
-  const { data } = trpc.getMe.useQuery();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  const me = useMe();
 
   return (
     <nav>
       <ul className={styles.menu}>
-        {data?.me ? (
+        {me ? (
           <>
             <li>
               <NavLink
@@ -45,7 +46,7 @@ export const Navigation: FC = () => {
             <li>
               <NavLink
                 component={Link}
-                label={`Sign Out (${data.me.telegram})`}
+                label={`Sign Out (${me.telegram})`}
                 to={routes.getViewSignOutRoute()}
               />
             </li>

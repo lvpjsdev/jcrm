@@ -18,6 +18,7 @@ import { UpdateUserPage } from './pages/UpdateUserPage';
 import { UsersPage } from './pages/UsersList';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 const theme = createTheme({});
 
@@ -87,6 +88,7 @@ export const App = () => (
               />
               <Route path={routes.getViewSignUpRoute()} element={<SignUpPage />} />
               <Route path={routes.getViewSignInRoute()} element={<SignInPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>
         </BrowserRouter>

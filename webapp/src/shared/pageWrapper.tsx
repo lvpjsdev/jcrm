@@ -8,6 +8,7 @@ import { type FC, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { type AppContext, useAppContext } from '../app/ctx';
 import { getViewSignInRoute } from '../app/routes';
+import { NotFoundPage } from '../pages/NotFoundPage';
 import { ErrorPageComponent } from './ui/ErrorPage';
 
 class CheckAccessError extends Error {}
@@ -134,9 +135,7 @@ const PageWrapper = <
   }
 
   if (checkExists && !checkExists(helperProps)) {
-    return (
-      <ErrorPageComponent title={checkExistsTitle} description={checkExistsMessage} />
-    );
+    return <NotFoundPage title={checkExistsTitle} description={checkExistsMessage} />;
   }
 
   try {
@@ -151,9 +150,7 @@ const PageWrapper = <
     return <Page {...props} />;
   } catch (error) {
     if (error instanceof CheckExistsError) {
-      return (
-        <ErrorPageComponent title={checkExistsTitle} description={checkExistsMessage} />
-      );
+      return <NotFoundPage title={checkExistsTitle} description={checkExistsMessage} />;
     }
 
     if (error instanceof CheckAccessError) {

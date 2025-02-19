@@ -3,6 +3,7 @@ import { updateUserZodSchema } from '@jcrm/backend/src/routes/users/updateUser/i
 import { Alert, Button, MultiSelect } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { useParams } from 'react-router';
+import { useMe } from '../../app/ctx';
 import { useForm } from '../../app/form';
 import type { ViewUsersRouteParams } from '../../app/routes';
 import { trpc } from '../../app/trpc';
@@ -11,6 +12,8 @@ import { Input } from '../../shared/ui/Input';
 export const UpdateUserPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   const { userId } = useParams() as ViewUsersRouteParams;
+  const trpcUtils = trpc.useUtils();
+  const me = useMe();
   const { data } = trpc.getUser.useQuery({ userId });
   const { data: keys } = trpc.getKeysList.useQuery();
   const { mutateAsync } = trpc.updateUser.useMutation();
@@ -24,8 +27,10 @@ export const UpdateUserPage = () => {
       keys: keys?.map((key) => key.id) || [],
     },
     onSubmit: async (values) => {
-      console.log(values);
       await mutateAsync({ id: userId, ...values });
+      if (me?.id === userId) {
+        void trpcUtils.getMe.invalidate();
+      }
     },
     validationSchema: updateUserZodSchema,
   });

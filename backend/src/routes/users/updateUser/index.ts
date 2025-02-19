@@ -10,7 +10,7 @@ export const updateUserTRPCRoute = trpc.procedure
     }
 
     try {
-      await ctx.prisma.user.update({
+      const updatedUser = await ctx.prisma.user.update({
         where: { id: input.id },
         data: {
           ...input,
@@ -24,6 +24,10 @@ export const updateUserTRPCRoute = trpc.procedure
           },
         },
       });
+
+      if (ctx.me.id === input.id) {
+        ctx.me = updatedUser;
+      }
     } catch (error) {
       throw new Error('No user with this id');
     }

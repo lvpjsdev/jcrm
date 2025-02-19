@@ -4,21 +4,31 @@ import { useParams } from 'react-router';
 import { useForm } from '../../app/form';
 import type { ViewKeysRouteParams } from '../../app/routes';
 import { trpc } from '../../app/trpc';
+import { withPageWrapper } from '../../shared/pageWrapper';
 import { Input } from '../../shared/ui/Input';
 
-export const UpdateKeyPage = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-  const { keyId } = useParams() as ViewKeysRouteParams;
-  const { data } = trpc.getKey.useQuery({ keyId });
+export const UpdateKeyPage = withPageWrapper({
+  authorizedOnly: true,
+  useQuery: () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+    const { keyId } = useParams() as ViewKeysRouteParams;
+    return trpc.getKey.useQuery({ keyId });
+  },
+  setProps: ({ queryResult, ctx, checkExists, checkAccess }) => {
+    const key = checkExists(queryResult.data);
+    checkAccess(ctx.me);
+    return { key };
+  },
+})(({ key }) => {
   const updateKey = trpc.updateKey.useMutation();
 
   const { formik, alertProps, buttonProps } = useForm({
     initialValues: {
-      name: data?.name || '',
-      key: data?.key || '',
+      name: key.name || '',
+      key: key.key,
     },
     onSubmit: async (values) => {
-      await updateKey.mutateAsync({ id: keyId, ...values });
+      await updateKey.mutateAsync({ id: key.id, ...values });
     },
     validationSchema: updateKeyZodSchema,
   });
@@ -51,4 +61,4 @@ export const UpdateKeyPage = () => {
       </form>
     </section>
   );
-};
+});

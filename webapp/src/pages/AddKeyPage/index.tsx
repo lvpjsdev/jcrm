@@ -2,9 +2,12 @@ import { addKeyZodSchema } from '@jcrm/backend/src/routes/keys/addKey/input';
 import { Alert, Button, Textarea } from '@mantine/core';
 import { useForm } from '../../app/form';
 import { trpc } from '../../app/trpc';
+import { withPageWrapper } from '../../shared/pageWrapper';
 import { Input } from '../../shared/ui/Input';
 
-export const AddKeyPage = () => {
+export const AddKeyPage = withPageWrapper({
+  authorizedOnly: true,
+})(() => {
   const addKey = trpc.addKey.useMutation();
 
   const { formik, alertProps, buttonProps } = useForm({
@@ -47,4 +50,4 @@ export const AddKeyPage = () => {
       </form>
     </section>
   );
-};
+});

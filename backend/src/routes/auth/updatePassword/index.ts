@@ -1,9 +1,9 @@
 import { trpc } from '../../../lib/trpc';
 import { getPassHash } from '../../../utils/getPassHash';
-import { zUpdateProfileZodSchema } from './input';
+import { zUpdatePasswordZodSchema } from './input';
 
 export const updatePasswordTRPCRoute = trpc.procedure
-  .input(zUpdateProfileZodSchema)
+  .input(zUpdatePasswordZodSchema)
   .mutation(async ({ ctx, input }) => {
     if (!ctx.me) {
       throw new Error('UNAUTHORIZED');

@@ -1,8 +1,14 @@
-/* eslint-disable complexity */
 import { Alert } from '@mantine/core';
+import InfiniteScroll from 'react-infinite-scroller';
 import { Link } from 'react-router';
 import { getViewUserRoute } from '../../app/routes';
 import { trpc } from '../../app/trpc';
+import { layoutContentRef } from '../../layouts/Layout/Layout';
+
+const checkNeedUseWindow = () =>
+  (layoutContentRef.current &&
+    getComputedStyle(layoutContentRef.current).overflow !== 'auto') ||
+  undefined;
 
 export const UsersPage = () => {
   const {
@@ -33,28 +39,26 @@ export const UsersPage = () => {
           {JSON.stringify(error, null, 2)}
         </Alert>
       ) : (
-        <>
-          <ul>
-            {data?.pages
-              .flatMap((page) => page.users)
-              .map((user) => (
-                <li key={user.id}>
-                  <Link to={getViewUserRoute({ userId: user.id })}>{user.telegram}</Link>
-                </li>
-              ))}
-          </ul>
-          {hasNextPage && !isFetchingNextPage && (
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                void fetchNextPage();
-              }}
-            >
-              Loading more
-            </button>
-          )}
-          {isFetchingNextPage && <span>Loading...</span>}
-        </>
+        <InfiniteScroll
+          threshold={250}
+          loadMore={() => {
+            if (hasNextPage && !isFetchingNextPage) {
+              void fetchNextPage();
+            }
+          }}
+          hasMore={hasNextPage}
+          loader={<span key={'loader'}>Loading...</span>}
+          getScrollParent={() => layoutContentRef.current}
+          useWindow={checkNeedUseWindow()}
+        >
+          {data?.pages
+            .flatMap((page) => page.users)
+            .map((user) => (
+              <div key={user.id}>
+                <Link to={getViewUserRoute({ userId: user.id })}>{user.telegram}</Link>
+              </div>
+            ))}
+        </InfiniteScroll>
       )}
     </>
   );

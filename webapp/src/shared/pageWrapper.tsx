@@ -13,6 +13,7 @@ import { ErrorPageComponent } from './ui/ErrorPage';
 
 class CheckAccessError extends Error {}
 class CheckExistsError extends Error {}
+class GetAuthorizedMeError extends Error {}
 
 const checkExistsFn = <T,>(value: T, message?: string): NonNullable<T> => {
   if (!value) {
@@ -44,6 +45,7 @@ type SetPropsProps<TQueryResult extends QueryResult | undefined> =
   HelperProps<TQueryResult> & {
     checkExists: typeof checkExistsFn;
     checkAccess: typeof checkAccessFn;
+    getAuthorizedMe: (message?: string) => NonNullable<AppContext['me']>;
   };
 type PageWrapperProps<
   TProps extends Props,
@@ -90,6 +92,14 @@ const PageWrapper = <
   const navigate = useNavigate();
   const ctx = useAppContext();
   const queryResult = useQuery?.();
+
+  const getAuthorizedMe = (message?: string) => {
+    if (!ctx.me) {
+      throw new GetAuthorizedMeError(message);
+    }
+
+    return ctx.me;
+  };
 
   const isRedirectNeeded = redirectedAuthorized && !ctx.me;
 
@@ -144,20 +154,39 @@ const PageWrapper = <
         ...helperProps,
         checkExists: checkExistsFn,
         checkAccess: checkAccessFn,
+        getAuthorizedMe,
         // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
       }) ?? ({} as TProps);
 
     return <Page {...props} />;
   } catch (error) {
     if (error instanceof CheckExistsError) {
-      return <NotFoundPage title={checkExistsTitle} description={checkExistsMessage} />;
+      return (
+        <NotFoundPage
+          title={checkExistsTitle}
+          description={checkExistsMessage || error.message}
+        />
+      );
     }
 
     if (error instanceof CheckAccessError) {
       return (
-        <ErrorPageComponent title={checkAccessTitle} description={checkAccessMessage} />
+        <ErrorPageComponent
+          title={checkAccessTitle}
+          description={checkAccessMessage || error.message}
+        />
       );
     }
+
+    if (error instanceof GetAuthorizedMeError) {
+      return (
+        <ErrorPageComponent
+          title={authorizedOnlyTitle}
+          description={authorizedOnlyMessage || error.message}
+        />
+      );
+    }
+
     throw error instanceof Error ? error : new Error(String(error));
   }
 };

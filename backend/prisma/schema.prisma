@@ -14,24 +14,26 @@ datasource db {
 }
 
 model User {
-  id        String        @id @default(uuid())
-  telegram  String        @unique
-  email     String?       @unique
-  startDate DateTime?
-  period    Int?
-  password  String
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
-  keys      KeysOnUsers[]
+  id           String        @id @default(uuid())
+  telegram     String        @unique
+  email        String?       @unique
+  startDate    DateTime?
+  period       Int?
+  password     String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  keys         KeysOnUsers[]
+  serialNumber Int           @unique @default(autoincrement())
 }
 
 model Key {
-  id        String        @id @default(uuid())
-  key       String        @unique
-  name      String?
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
-  users     KeysOnUsers[]
+  id           String        @id @default(uuid())
+  key          String        @unique
+  name         String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  users        KeysOnUsers[]
+  serialNumber Int           @unique @default(autoincrement())
 }
 
 model KeysOnUsers {

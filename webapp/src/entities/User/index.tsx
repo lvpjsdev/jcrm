@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { Link, useParams } from 'react-router';
 import { getViewUpdateUserRoute, type ViewUsersRouteParams } from '../../app/routes';
 import { trpc } from '../../app/trpc';
+import { Loader } from '../../shared/ui/Loader';
 
 // eslint-disable-next-line complexity
 export const User: FC = () => {
@@ -13,7 +14,7 @@ export const User: FC = () => {
   });
 
   if (isLoading || isFetching) {
-    return <span>Loading...</span>;
+    return <Loader type="section" />;
   }
 
   if (isError) {

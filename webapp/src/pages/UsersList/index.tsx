@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { getViewUserRoute } from '../../app/routes';
 import { trpc } from '../../app/trpc';
 import { layoutContentRef } from '../../layouts/Layout/Layout';
+import { Loader } from '../../shared/ui/Loader';
 
 const checkNeedUseWindow = () =>
   (layoutContentRef.current &&
@@ -33,7 +34,7 @@ export const UsersPage = () => {
     <>
       <h1>Users</h1>
       {isLoading || isRefetching ? (
-        <div>Loading...</div>
+        <Loader />
       ) : isError ? (
         <Alert color="red" title="Error">
           {JSON.stringify(error, null, 2)}
@@ -47,7 +48,7 @@ export const UsersPage = () => {
             }
           }}
           hasMore={hasNextPage}
-          loader={<span key={'loader'}>Loading...</span>}
+          loader={<Loader key={'loader'} type="section" />}
           getScrollParent={() => layoutContentRef.current}
           useWindow={checkNeedUseWindow()}
         >

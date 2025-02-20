@@ -1,5 +1,6 @@
 import type { TRPCRouterOutput } from '@jcrm/backend/src/routes';
 import { createContext, useContext, type ReactNode } from 'react';
+import { Loader } from '../shared/ui/Loader';
 import { trpc } from './trpc';
 
 export type AppContext = {
@@ -21,7 +22,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
       }}
     >
       {isLoading || isFetching ? (
-        <p>Loading...</p>
+        <Loader />
       ) : isError ? (
         <p>Error: {error.message}</p>
       ) : (

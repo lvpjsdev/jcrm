@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 
 import { getViewSignInRoute } from '../../app/routes';
 import { trpc } from '../../app/trpc';
+import { Loader } from '../../shared/ui/Loader';
 
 export const SignOutPage = () => {
   const navigate = useNavigate();
@@ -13,5 +14,5 @@ export const SignOutPage = () => {
     void trpcUtils.invalidate();
     void navigate(getViewSignInRoute());
   }, []);
-  return <p>Loading...</p>;
+  return <Loader />;
 };

@@ -10,6 +10,7 @@ import { type AppContext, useAppContext } from '../app/ctx';
 import { getViewSignInRoute } from '../app/routes';
 import { NotFoundPage } from '../pages/NotFoundPage';
 import { ErrorPageComponent } from './ui/ErrorPage';
+import { Loader } from './ui/Loader';
 
 class CheckAccessError extends Error {}
 class CheckExistsError extends Error {}
@@ -110,7 +111,7 @@ const PageWrapper = <
   }, [isRedirectNeeded, navigate]);
 
   if (queryResult?.isLoading || queryResult?.isFetching || isRedirectNeeded) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   if (queryResult?.isError) {

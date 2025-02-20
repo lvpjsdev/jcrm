@@ -4,6 +4,7 @@ import { trpc } from '../lib/trpc';
 import { getMeTRPCRoute } from './auth/getMe';
 import { signInTRPCRoute } from './auth/signIn';
 import { signUpTRPCRoute } from './auth/signUp';
+import { updateProfileTRPCRoute } from './auth/updateProfile';
 import { addKeyTRPCRoute } from './keys/addKey';
 import { getKeyTRPCRoute } from './keys/getKey';
 import { getKeysListTRPCRoute } from './keys/getKeysList';
@@ -21,6 +22,7 @@ export const trpcRouter = trpc.router({
   getMe: getMeTRPCRoute,
   signIn: signInTRPCRoute,
   signUp: signUpTRPCRoute,
+  updateProfile: updateProfileTRPCRoute,
   addKey: addKeyTRPCRoute,
   getKey: getKeyTRPCRoute,
   getKeysList: getKeysListTRPCRoute,

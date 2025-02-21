@@ -14,16 +14,23 @@ datasource db {
 }
 
 model User {
-  id           String        @id @default(uuid())
-  telegram     String        @unique
-  email        String?       @unique
+  id           String           @id @default(uuid())
+  telegram     String           @unique
+  email        String?          @unique
   startDate    DateTime?
   period       Int?
   password     String
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
   keys         KeysOnUsers[]
-  serialNumber Int           @unique @default(autoincrement())
+  serialNumber Int              @unique @default(autoincrement())
+  permissions  UserPermission[]
+  blockedAt    DateTime?
+}
+
+enum UserPermission {
+  ALL
+  BLOCK_USERS
 }
 
 model Key {

@@ -1,8 +1,6 @@
 import { trpc } from '../../../lib/trpc';
+import { toClientMe } from '../../../utils/toClientMe';
 
 export const getMeTRPCRoute = trpc.procedure.query(({ ctx }) => ({
-  me: ctx.me && {
-    id: ctx.me.id,
-    telegram: ctx.me.telegram,
-  },
+  me: toClientMe(ctx.me),
 }));

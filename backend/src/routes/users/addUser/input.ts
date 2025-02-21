@@ -1,3 +1,4 @@
+import { UserPermission } from '@prisma/client';
 import z from 'zod';
 
 export const addUserZodSchema = z.object({
@@ -11,4 +12,5 @@ export const addUserZodSchema = z.object({
   period: z.number().min(1).max(100),
   password: z.string().min(1),
   keys: z.array(z.string()),
+  permissions: z.array(z.nativeEnum(UserPermission)).optional(),
 });

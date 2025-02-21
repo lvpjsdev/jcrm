@@ -7,6 +7,7 @@ import { useMe } from '../../app/ctx';
 import { useForm } from '../../app/form';
 import type { ViewUsersRouteParams } from '../../app/routes';
 import { trpc } from '../../app/trpc';
+import { userPermissions } from '../../entities/User';
 import { Input } from '../../shared/ui/Input';
 
 export const UpdateUserPage = () => {
@@ -25,6 +26,7 @@ export const UpdateUserPage = () => {
       startDate: data?.startDate || new Date(),
       period: data?.period || 0,
       keys: keys?.map((key) => key.id) || [],
+      permissions: data?.permissions || [],
     },
     onSubmit: async (values) => {
       await mutateAsync({ id: userId, ...values });
@@ -87,6 +89,15 @@ export const UpdateUserPage = () => {
           // eslint-disable-next-line no-void
           onChange={(value) => void formik.setFieldValue('keys', value)}
           value={formik.values.keys}
+          disabled={formik.isSubmitting}
+        />
+        <MultiSelect
+          name="permissions"
+          label="Permissions"
+          data={userPermissions}
+          // eslint-disable-next-line no-void
+          onChange={(value) => void formik.setFieldValue('permissions', value)}
+          value={formik.values.permissions}
           disabled={formik.isSubmitting}
         />
         <Button {...buttonProps} type="submit">

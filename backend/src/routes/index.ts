@@ -12,9 +12,11 @@ import { getKeysListTRPCRoute } from './keys/getKeysList';
 import { removeKeyTRPCRoute } from './keys/removeKey';
 import { updateKeyTRPCRoute } from './keys/updateKey';
 import { addUserTRPCRoute } from './users/addUser';
+import { blockUserTRPCRoute } from './users/blockUser';
 import { getUserTRPCRoute } from './users/getUser';
 import { getUsersListTRPCRoute } from './users/getUsersList';
 import { removeUserTRPCRoute } from './users/removeUser';
+import { unblockUserTRPCRoute } from './users/unblockUser';
 import { updateUserTRPCRoute } from './users/updateUser';
 // @endindex
 
@@ -31,9 +33,11 @@ export const trpcRouter = trpc.router({
   removeKey: removeKeyTRPCRoute,
   updateKey: updateKeyTRPCRoute,
   addUser: addUserTRPCRoute,
+  blockUser: blockUserTRPCRoute,
   getUser: getUserTRPCRoute,
   getUsersList: getUsersListTRPCRoute,
   removeUser: removeUserTRPCRoute,
+  unblockUser: unblockUserTRPCRoute,
   updateUser: updateUserTRPCRoute,
   // @endindex
 });

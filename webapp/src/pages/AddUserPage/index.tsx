@@ -3,6 +3,7 @@ import { Alert, Button, MultiSelect } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { useForm } from '../../app/form';
 import { trpc } from '../../app/trpc';
+import { userPermissions } from '../../entities/User';
 import { Input } from '../../shared/ui/Input';
 
 export const AddUserPage = () => {
@@ -17,6 +18,7 @@ export const AddUserPage = () => {
       period: 0,
       password: '123',
       keys: [],
+      permissions: [],
     },
     onSubmit: async (values) => {
       await mutateAsync({ ...values, startDate: new Date(values.startDate) });
@@ -76,6 +78,15 @@ export const AddUserPage = () => {
           // eslint-disable-next-line no-void
           onChange={(value) => void formik.setFieldValue('keys', value)}
           value={formik.values.keys}
+          disabled={formik.isSubmitting}
+        />
+        <MultiSelect
+          name="permissions"
+          label="Permissions"
+          data={userPermissions}
+          // eslint-disable-next-line no-void
+          onChange={(value) => void formik.setFieldValue('permissions', value)}
+          value={formik.values.permissions}
           disabled={formik.isSubmitting}
         />
         <Button {...buttonProps} type="submit">

@@ -1,3 +1,4 @@
+import { UserPermission } from '@prisma/client';
 import z from 'zod';
 
 export const updateUserZodSchema = z.object({
@@ -6,4 +7,5 @@ export const updateUserZodSchema = z.object({
   startDate: z.date().optional(),
   period: z.number().min(1).max(100).optional(),
   keys: z.array(z.string()).optional(),
+  permissions: z.array(z.nativeEnum(UserPermission)).optional(),
 });
